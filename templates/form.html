@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>upload</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <h2>{{ message }}</h2>
+    <form action="/submit" method="POST">
+        <div>
+            <label for="name">Artist's name:</label>
+            <input type="text" id="name" name ="name">
+        </div>
+        <div>
+            <label for="medium">Medium(s) used:</label>
+            <input type="text" id="medium" name ="medium">
+        </div>
+        <div>
+            <button>Submit</button>
+        </div>
+    </form>
+</body>
+</html>
