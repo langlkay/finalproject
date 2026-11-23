@@ -8,7 +8,11 @@
 </head>
 <body>
     <h2>{{ message }}</h2>
-    <form action="/submit" method="POST">
+    <form action="/upload" method="POST" enctype="multipart/form-data">
+        <div>
+            <label for="artwork-image">Artwork:</label>
+            <input type="file" id="artwork-image" name ="artwork-image" accept="image/*" required>
+        </div>
         <div>
             <label for="name">Artist's name:</label>
             <input type="text" id="name" name ="name">
@@ -18,7 +22,7 @@
             <input type="text" id="medium" name ="medium">
         </div>
         <div>
-            <button>Submit</button>
+            <button type="submit">Submit</button>
         </div>
     </form>
 </body>

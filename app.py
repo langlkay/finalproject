@@ -1,4 +1,8 @@
-from flask import Flask, render_template, request
+import os
+import json
+from flask import Flask, render_template, request, redirect, url_for
+from werkzeug.utils import secure_filename
+
 
 app = Flask(__name__)
 
@@ -9,14 +13,16 @@ def home():
 
 @app.route("/upload", methods = ["GET", "POST"])
 def upload():
-    message = "this is my app"
+    message = "Upload Artwork!"
     artwork = None
-    
+
     if request.method == "POST":
-        photo = request.files.get["photo"]
-        title = request.form.get["title"]
-        medium = request.form.get["medium"]
-        filename = ""
+        photo = request.files.get("artwork-image")
+        title = request.form.get("name")
+        medium = request.form.get("medium")
+
+        filename = secure_filename(photo.filename)
+        photo.save(os.path.join("static/uploadedArt", filename))
 
         message = "this is my app"
         artwork = {
@@ -25,6 +31,7 @@ def upload():
             "photo": filename
         }
         message = "UPLOADED!!"
+        return render_template("index.html", message=message, artwork=artwork)
     return render_template("form.html", message=message, artwork=artwork)
 
 

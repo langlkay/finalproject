@@ -7,8 +7,19 @@
     <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
 </head>
 <body>
-    <h2>{{ message }}</h2>
-    <h4>click <a href="/upload">here</a> to upload an image</h4>
-    
+    <h1>{{ message }}</h1>
+
+    {% if artwork %}
+        <div>
+            <h2>{{ artwork.title }}</h2>
+            <h2>{{ artwork.medium }}</h2>
+            <img src="{{ url_for('static', filename='uploadedArt/' + artwork.photo) }}"
+                alt = "uploaded art">
+
+        </div>
+    {% endif %}
+
+    <h4>click <a href="/upload">here</a> to upload artworks</h4>
+
 </body>
 </html>
