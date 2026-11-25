@@ -9,14 +9,18 @@ app = Flask(__name__)
 @app.route("/")
 def home():
     message = "Welcome to my app"
-    return render_template("index.html", message=message)
+    artworks = load_art()
+    return render_template("index.html", message=message, artworks=artworks)
 
 @app.route("/upload", methods = ["GET", "POST"])
 def upload():
     message = "Upload Artwork!"
     artwork = None
+    artworks = []
 
     if request.method == "POST":
+       
+
         photo = request.files.get("artwork-image")
         title = request.form.get("name")
         medium = request.form.get("medium")
@@ -30,8 +34,16 @@ def upload():
             "medium": medium,
             "photo": filename
         }
+        
+        artworks.append(artwork)
+
         message = "UPLOADED!!"
-        return render_template("index.html", message=message, artwork=artwork)
-    return render_template("form.html", message=message, artwork=artwork)
+        return render_template("index.html", message=message, artwork=artwork, artworks=artworks)
+    return render_template("form.html", message=message, artwork=artwork, artworks=artworks)
 
 
+def load_art():
+    with open("artworks.json", "r") as file:
+        artworks = json.load(file)
+
+    return artworks

@@ -10,13 +10,14 @@
     <h1>{{ message }}</h1>
 
     {% if artwork %}
-        <div>
-            <h2>{{ artwork.title }}</h2>
-            <h2>{{ artwork.medium }}</h2>
-            <img src="{{ url_for('static', filename='uploadedArt/' + artwork.photo) }}"
-                alt = "uploaded art">
-
-        </div>
+        {% for artwork in artworks %}
+            <div>
+                <h2>{{ artwork.title }}</h2>
+                <h2>{{ artwork.medium }}</h2>
+                <img src="{{ url_for('static', filename='uploadedArt/' + artwork.photo) }}"
+                    alt = "uploaded art">
+            </div>
+        {% endfor %}
     {% endif %}
 
     <h4>click <a href="/upload">here</a> to upload artworks</h4>
